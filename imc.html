@@ -1,31 +1,101 @@
+
 <html lang="pt-br">
-  <p>Coloque os seus dados na calculadora e calcule o seu IMC:</p>
-  <div class="field-age"> <label>Idade</label>
-  </div>
-  <input type="number" name="age" text="Idade" placeholder="Ex: 35" maxlength="200" id="age"  min="0" max="119"> <span class="caption">anos</span>
-  <div class="field-height"> <label>Altura</label>
-  </div>
-  <input type="number" name="height" text="Altura" placeholder="Ex: 165" maxlength="200" id="height" min="0" max="225"> <span class="caption">cm</span>
-  <div class="field-weight"> <label>Peso</label>
-  </div>
-  <input type="number" name="weight" text="Peso" placeholder="Ex: 62,5" maxlength="200" id="weight"  min="0" max="300"> <span class="caption">kg</span>
-  <div>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora IMC</title>
+</head>
+<p>Coloque os seus dados na calculadora e calcule o seu IMC:</p>
+<div class="field-age"><label>Idade</label>
+</div>
+<input type="number" name="age" text="Idade" placeholder="Ex: 35" maxlength="200" id="age" min="0" max="119"> <span
+        class="caption">anos</span>
+<div class="field-height"><label>Altura</label>
+</div>
+<input type="number" name="height" text="Altura" placeholder="Ex: 165" maxlength="200" id="height" min="0" max="225">
+<span class="caption">cm</span>
+<div class="field-weight"><label>Peso</label>
+</div>
+<input type="number" name="weight" text="Peso" placeholder="Ex: 62,5" maxlength="200" id="weight" min="0" max="300">
+<span class="caption">kg</span>
+<div>
     <input type="button" id="submit" name="calculate" value="Calcular">
-  </div>
-  </div>
+</div>
+</div>
 </body>
 <script>
-   const calculate = document.getElementById('submit')
+
+    function calcula_imc(altura, peso) {
+        let imc = peso / (altura ** 2)
+        return imc;
+    }
+
+    function classifica_imc(imc) {
+
+        let classificacao = ''
+        /*
+            Utilizando a calculadora do IMC do exercício anterior, faça com que retorne no alerta em qual faixa o usuário se encontra:
+
+            Menor que 16 - Magreza grave
+            16 a menor que 17 - Magreza moderada
+            17 a menor que 18,5 - Magreza leve
+            18,5 a menor que 25 - Saudável
+            25 a menor que 30 - Sobrepeso
+            30 a menor que 35 - Obesidade Grau I
+            35 a menor que 40 - Obesidade Grau II (considerada severa)
+            Maior que 40 - Obesidade Grau III (considerada mórbida)
+
+         */
+
+        if (imc < 16) {
+            classificacao = 'Magreza grave';
+        } else if (imc >= 16 && imc < 17) {
+            classificacao = 'Magreza moderada';
+        } else if (imc >= 17 && imc < 18.5) {
+            classificacao = 'Magreza leve';
+        } else if (imc >= 18.5 && imc < 25) {
+            classificacao = 'Saudável';
+        } else if (imc >= 25 && imc < 30) {
+            classificacao = 'Sobrepeso';
+        } else if (imc >= 30 && imc < 35) {
+            classificacao = 'Obesidade Grau I'
+        } else if (imc >= 35 && imc < 40) {
+            classificacao = 'Obesidade Grau II (Severa)'
+        } else if (imc >= 35 && imc < 40) {
+            classificacao = 'Obesidade Grau III (Mórbida)'
+        }
+
+        return classificacao;
+    }
+
+
+    const calculate = document.getElementById('submit')
     // Crie a lógica a partir deste ponto
-   calculate.addEventListener('click', () => {
 
-      let idade = document.getElementById('age').value
-      let altura = (document.getElementById('height').value)/100
-      let peso = document.getElementById('weight').value
+    let historico_imc = []
 
-     let imc = peso/(altura**2)
-    
-    alert('Resultado IMC: '+imc)
-  })
+    calculate.addEventListener('click', () => {
+        let dados = []
+        //as divisões servem para o "cast" do string para numero
+        let idade = (document.getElementById('age').value) / 1
+        dados.push(idade)
+        let altura = (document.getElementById('height').value) / 100
+        dados.push(altura)
+        let peso = (document.getElementById('weight').value) / 1
+        dados.push(peso)
+
+        let imc = calcula_imc(altura, peso)
+        dados.push(imc)
+        let classificacao = classifica_imc(imc)
+        dados.push(classificacao)
+
+        historico_imc.push(dados)
+
+        alert('Resultado IMC: ' + imc)
+        alert('Classificação: ' + classificacao)
+
+        console.table(historico_imc)
+
+
+    })
 </script>
 </html>
