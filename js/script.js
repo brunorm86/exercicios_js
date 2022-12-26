@@ -101,34 +101,34 @@ Utilize a estrutura de repetição for para escrever dois algoritmos: um que imp
  array e outro que imprima a menor. Considere o número de caracteres de cada palavra.
 */
 
+
+/*
+4 - Escreva um algoritmo que imprima no console o maior número primo entre 2 e 100.
+https://www.todamateria.com.br/o-que-sao-numeros-primos/#:~:text=Os%20n%C3%BAmeros%20primos%20s%C3%A3o%20aqueles,por%20um%20e%20ele%20mesmo.
+ */
+
 function verifica_se_primo(num) {
     //números    inferiores    a    2    não    possuem    primos
     if (num < 2) {
         print("Número inválido!")
     } else {
         lista_divisores = [1]
-        for i in range(2, int(num / 2)):
-        if num % i == 0:
-        lista_divisores.append(i)
-    else:
-        lista_divisores.append(num)
+        for (num = 2; num / 2; num++) {
 
-        primo = ''
-        if (len(lista_divisores) > 2) {
-            primo += 'NÃO É PRIMO'
-
-        } else {
-            primo += 'É PRIMO'
         }
-        console.log(
-            "O número {num} possui como divisores {lista_divisores}. Logo, {num} {primo}"
-        )
-
+        if (num % i == 0) {
+            lista_divisores.append(i)
+        } else {
+            lista_divisores.append(num)
+        }
     }
+
+    primo = ''
+    if (lista_divisores.length > 2) {
+        primo += 'NÃO É PRIMO'
+
+    } else {
+        primo += 'É PRIMO'
+    }
+    console.log("O número " + num + " possui como divisores " + lista_divisores + ". Logo, " + num + " " + primo);
 }
-
-
-/*
-4 - Escreva um algoritmo que imprima no console o maior número primo entre 2 e 100.
-https://www.todamateria.com.br/o-que-sao-numeros-primos/#:~:text=Os%20n%C3%BAmeros%20primos%20s%C3%A3o%20aqueles,por%20um%20e%20ele%20mesmo.
- */
